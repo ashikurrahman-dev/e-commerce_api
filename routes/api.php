@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [RegisterController::class, 'register']);
 Route::post('/login', [AuthenticateController::class, 'login']);
+// admin login
+Route::post('/admin/login', [AuthenticateController::class, 'login']);
 Route::get('/logout', [AuthenticateController::class, 'logout'])->middleware('auth:sanctum');
 
 
