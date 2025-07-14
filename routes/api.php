@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Auth\AuthenticateController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Middleware\AdminMiddleware;
@@ -19,4 +20,5 @@ Route::middleware([AdminMiddleware::class, 'auth:sanctum'])->get('/admin', funct
 
 Route::prefix('/admin')->middleware(['auth:sanctum', AdminMiddleware::class])->group(function () {
     Route::apiResource('/categories', CategoryController::class);
+    Route::apiResource('/products', ProductController::class);
 });
