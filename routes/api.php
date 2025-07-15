@@ -29,3 +29,8 @@ Route::prefix('/admin')->middleware(['auth:sanctum', AdminMiddleware::class])->g
     Route::get('/orders/{id}', [OrderController::class, 'show']);
     Route::patch('/orders/{id}/status', [OrderController::class, 'updateStatus']);
 });
+
+Route::middleware('auth:sanctum')->group(function(){
+    Route::get('/products', [App\Http\Controllers\ProductController::class, 'index']);
+    Route::get('/products/{id}', [App\Http\Controllers\ProductController::class, 'show']);
+});
