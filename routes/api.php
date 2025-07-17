@@ -6,8 +6,10 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Auth\AuthenticateController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderItemController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -41,4 +43,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/cart', [CartController::class, 'store']);
     Route::put('/cart/{id}', [CartController::class, 'update']);
     Route::delete('/cart/{id}', [CartController::class, 'destroy']);
+    // order route
+    Route::post('/orders', [OrderItemController::class, 'store']);       // Place order
+    Route::get('/orders', [OrderItemController::class, 'index']);        // List orders
+    Route::get('/orders/{id}', [OrderItemController::class, 'show']);
 });
