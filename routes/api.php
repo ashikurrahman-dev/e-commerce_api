@@ -5,8 +5,10 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Auth\AuthenticateController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\CartController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -30,7 +32,13 @@ Route::prefix('/admin')->middleware(['auth:sanctum', AdminMiddleware::class])->g
     Route::patch('/orders/{id}/status', [OrderController::class, 'updateStatus']);
 });
 
-Route::middleware('auth:sanctum')->group(function(){
+Route::middleware('auth:sanctum')->group(function () {
+    // product route
     Route::get('/products', [App\Http\Controllers\ProductController::class, 'index']);
     Route::get('/products/{id}', [App\Http\Controllers\ProductController::class, 'show']);
+    // cart route
+    Route::get('/cart', [CartController::class, 'index']);
+    Route::post('/cart', [CartController::class, 'store']);
+    Route::put('/cart/{id}', [CartController::class, 'update']);
+    Route::delete('/cart/{id}', [CartController::class, 'destroy']);
 });
